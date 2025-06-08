@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: taskboard_41904_production
   username: taskboard_41904
   password: <%= ENV["TASKBOARD_41904_DATABASE_PASSWORD"] %>
