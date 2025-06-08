@@ -1,24 +1,49 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## usersテーブル
 
-* Ruby version
+| Column   | Type   |Options      |
+| -------- | ------ | ----------- |
+| name     | string | null: false |
+| email    | string | null: false, unique: true |
+| password | string | null: false |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :tasks
+- has_many :comments
 
-* Database creation
+## taskテーブル
 
-* Database initialization
+| Column        | Type       |Options      |
+| ------------- | ---------- | ----------- |
+| task_name     | string     | null: false |
+| deadline      | datetime   | null: false |
+| priority      | integer    | null: false |
+| status        | integer    | null: false |
+| content       | text       | null: false |
+| position      | integer    |
+| user          | references | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_many :comments
 
-* Deployment instructions
+※ priority / status は ActiveHash を使用予定
+※ Taskモデルに 'belongs_to_active_hash :priority', 'belongs_to_active_hash :status' を書く
 
-* ...
+## commentテーブル
+
+| Column  | Type       |Options      |
+| ------- | ---------- | ----------- |
+| comment | text       | null: false |
+| user    | references | null: false, foreign_key: true |
+| task    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :task
