@@ -2,12 +2,14 @@
   display: flex;
 }
 
+/* サイドバー部分 */
 .side_bar{
   width: 300px;
   height: 100vh;
   background-color: #253141;
 }
 
+/* サイドバー上部*/
 .side_header{
   height: 100px;
   padding: 0 20px;
@@ -31,16 +33,17 @@
   text-decoration: none;
 }
 
+/* サイドバー下部*/
 .side_footer{
   background-color: #2F3E51;
   height: calc(100vh - 100px);
   padding: 0 20px;
 }
+
 .tasks{
   width: calc(100vw - 300px);
   height: 100vh;
 }
-
 
 .task_select{
   padding-top: 30px;
@@ -55,29 +58,26 @@
   color: #ffffff;
 }
 
+/* タスク部分 */
 
+/* タスク上部 */
 .task_header{
   height: 100px;
   background-color: #ffffff;
   padding: 0 20px;
 }
 
+.task_projects{
+  font-size: 20px;
+  padding: 30px;
+}
+
+/* タスクメイン部分 */
 .task_main{
   height: calc(100vh - 190px);
   background-color: #fafafa;
   padding: 0 20px;
   overflow-y: scroll;
-}
-
-.task_footer{
-  height: 90px;
-  background-color: #dddddd;
-  padding: 0 20px;
-}
-
-.task_projects{
-  font-size: 20px;
-  padding: 30px;
 }
 
 .task{
@@ -107,3 +107,13 @@
 .content{
   padding-left: 10px;
 }
+
+/* タスク下部 */
+.task_footer{
+  height: 90px;
+  background-color: #dddddd;
+  padding: 0 20px;
+}
+
+
+
