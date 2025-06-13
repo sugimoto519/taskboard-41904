@@ -11,12 +11,31 @@
 .side_header{
   height: 100px;
   padding: 0 20px;
+  background-color: #253141;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user_name a{
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.task_create_btn a{
+  color: deepskyblue;
+  font-size: 10px;
+  border: 1px solid lightskyblue;
+  padding: 14px;
+  text-decoration: none;
 }
 
 .side_footer{
   background-color: #2F3E51;
   height: calc(100vh - 100px);
   padding: 0 20px;
+  overflow-y: scroll;
 }
 .tasks{
   width: calc(100vw - 300px);
@@ -39,4 +58,17 @@
   height: 90px;
   background-color: #dddddd;
   padding: 0 20px;
+}
+
+.task_select{
+  padding-top: 30px;
+}
+
+.task_bar{
+  margin-top: 50px;
+}
+
+.task_bar a{
+  text-decoration: none;
+  color: #ffffff;
 }
