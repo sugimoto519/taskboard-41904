@@ -1,0 +1,91 @@
+/* 全体ヘッダーのスタイル */
+.main-header {
+  display: flex; /* ロゴとナビゲーションを横並びにする */
+  justify-content: space-between; /* ロゴを左、ナビゲーションを右に配置 */
+  align-items: center; /* 要素を垂直方向中央に揃える */
+  padding: 0.5rem 1.5rem; /* ヘッダー内の上下左右の余白 */
+  background-color: #f8f9fa; /* ヘッダーの背景色 (ダークグレー) */
+  border-bottom: 3px solid #007bff; /* ヘッダー下部にアクセントボーダー (青) */
+}
+  
+/* ロゴ部分のスタイル */
+.logo a {
+  font-family: 'Arial Black', Gadget, sans-serif; /* インパクトのあるフォント */
+  font-size: 2rem; /* フォントサイズを大きく */
+  font-weight: bold; /* 太字 */
+  color: #007bff; 
+  text-decoration: none; /* リンクの下線を消す */
+  letter-spacing: 1px; /* 文字間隔を少し広げる */
+}
+
+.logo a:hover {
+  color: #0056b3; /* ホバー時に青色に変更 */
+  transition: color 0.3s ease;
+}
+
+
+/*
+  ナビゲーションバーの共通スタイル
+  .user_nav (ログイン時) と .guest_nav (未ログイン時) に適用
+*/
+.user_nav,
+.guest_nav {
+  padding: 1rem;
+  background-color: #f8f9fa; /* 明るいグレーの背景 */
+  border-bottom: 1px solid #dee2e6; /* 薄い境界線 */
+  text-align: right; /* リンクを右揃えにする */
+  margin-bottom: 1.5rem; /* ナビゲーションバーの下に余白 */
+}
+
+/*
+  ログイン時の「ログアウト」リンクのスタイル
+  .user_nav 内の a タグに適用
+*/
+.user_nav a {
+  color: #dc3545; /* 赤色 (警告や重要な操作を示す色) */
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #dc3545;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.user_nav a:hover {
+  background-color: #dc3545;
+  color: #fff; /* ホバー時に背景を赤、文字を白に */
+}
+
+/*
+  未ログイン時の「ログイン」「新規登録」リンクのスタイル
+  .guest_nav 内の class="post" を持つ a タグに適用
+*/
+.guest_nav a.post {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin-left: 0.75rem; /* リンク間の余白 */
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+/* 「ログイン」リンクのスタイル */
+.guest_nav a.post[href*="/users/sign_in"] { /* href属性を元にログインリンクを特定 */
+  color: #007bff; /* 青色 (主要なアクションを示す色) */
+  border: 1px solid #007bff;
+}
+
+.guest_nav a.post[href*="/users/sign_in"]:hover {
+  background-color: #e9ecef; /* ホバー時に薄いグレーの背景 */
+  color: #0056b3; /* ホバー時に濃い青色の文字 */
+}
+
+/* 「新規登録」リンクのスタイル (より目立たせる) */
+.guest_nav a.post[href*="/users/sign_up"] { /* href属性を元に新規登録リンクを特定 */
+  background-color: #007bff;
+  color: #fff; /* 背景を青、文字を白に */
+  border: 1px solid #007bff;
+}
+
+.guest_nav a.post[href*="/users/sign_up"]:hover {
+  background-color: #0056b3; /* ホバー時に濃い青色の背景 */
+  border-color: #0056b3;
+}
