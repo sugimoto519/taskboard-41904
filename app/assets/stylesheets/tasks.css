@@ -58,9 +58,9 @@
   color: #ffffff;
 }
 
-/* タスク部分 */
+/* task部分 */
 
-/* タスク上部 */
+/* task_header上部 */
 .task_header{
   height: 100px;
   background-color: #ffffff;
@@ -72,12 +72,17 @@
   padding: 30px;
 }
 
-/* タスクメイン部分 */
+.task_projects a{
+  text-decoration: none;
+  color: black;
+}
+
+/* task_main部分 */
 .task_main{
   height: calc(100vh - 190px);
   background-color: #fafafa;
   padding: 0 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .task{
@@ -108,7 +113,7 @@
   padding-left: 10px;
 }
 
-/* タスク下部 */
+/* task_footer部分 */
 .task_footer{
   height: 90px;
   background-color: #dddddd;
