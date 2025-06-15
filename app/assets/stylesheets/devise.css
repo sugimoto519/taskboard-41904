@@ -1,0 +1,105 @@
+/* 新しい認証フォームコンテナのスタイル */
+.auth-form-container {
+  width: 50%; /* コンテナ全体の幅を50%に設定 */
+  margin: 2rem auto; /* 上下に2remのマージン、左右はautoで中央寄せ */
+  padding: 2rem; /* コンテナ内部の余白 */
+  background-color: #f8f9fa; 
+  border-radius: 0.3rem; 
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* 薄い影を付ける（任意） */
+}
+
+.auth-form-container h2 {
+  text-align: center; /* h2のテキストを中央揃え */
+  margin-bottom: 1.5rem;
+}
+
+/* Devise共有リンクのスタイル */
+.auth-form-container .devise-links {
+  text-align: center; /* リンクテキストを中央揃え */
+  margin-top: 2rem; /* フォームとリンクの間に余白を追加 */
+  font-size: 20px;
+}
+
+/* Devise共有リンク内のaタグのスタイル */
+.auth-form-container .devise-links a {
+  color: #555; /* リンクの文字色を濃いめのグレーに */
+  text-decoration: none; /* 下線を消す */
+  margin: 0 0.5em; /* リンク同士の左右に少し余白を設ける */
+}
+
+.auth-form-container .devise-links a:hover {
+  color: #007bff; /* マウスオーバー時の文字色を青に */
+  text-decoration: underline; /* マウスオーバー時に下線を表示 */
+}
+
+.form-group {
+  margin-bottom: 1rem; 
+}
+
+.form-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-text.text-muted {
+  font-size: 0.875em;
+  color: #6c757d; /* text-muted のような効果 */
+  display: block; /* 改行されるように */
+  margin-top: 0.25rem;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important; /* mt-4 のような効果 */
+}

@@ -1,6 +1,6 @@
 <div class="side_header">
   <div class="user_name">
-    <a href="#">Yamada</a>
+    <%= link_to current_user.name, edit_user_registration_path(current_user) %>
   </div>
   <div class="task_create_btn">
     <a href="#">タスクを作成</a>
