@@ -26,8 +26,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_15_130416) do
   create_table "tasks", charset: "utf8mb3", force: :cascade do |t|
     t.string "task_name", null: false
     t.datetime "deadline", null: false
-    t.integer "priority", null: false
-    t.integer "status", null: false
+    t.integer "priority_id", null: false
+    t.integer "status_id", null: false
     t.text "content", null: false
     t.integer "position"
     t.bigint "user_id", null: false
