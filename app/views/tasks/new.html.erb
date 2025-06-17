@@ -1,3 +1,17 @@
 <%= form_with model: @task, local: true do |f| %>
-  <%= f.text_field :task_name, placeholder: "タスク名" %>
+  <div class="field">
+    <%= f.label :task_name, "タスク" %><br>
+    <%= f.text_field :task_name, placeholder: "タスク名を入力してください" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :deadline, "期限" %><br>
+    <%= f.datetime_field :deadline %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content, "内容" %><br>
+    <%= f.text_field :content, placeholder: "タスク内容を入力してください" %>
+  </div>
+
 <% end %>
