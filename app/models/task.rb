@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user
   belongs_to :priority
   belongs_to :status
 

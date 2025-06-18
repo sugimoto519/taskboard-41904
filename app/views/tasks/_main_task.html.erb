@@ -5,6 +5,13 @@
 </div>
 
 <div class="task_main">
+  <%= @tasks.each do |task| %>
+    <%= task.task_name %>
+    <%= task.deadline %>
+    <%= task.priority.name %>
+    <%= task.status.name %>
+    <%= task.content %>
+  <% end %>
 
   <div class="task">
     <div class="task_name">業者者への回答</div>
