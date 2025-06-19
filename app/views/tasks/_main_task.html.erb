@@ -1,36 +1,41 @@
-<div class="task_header">
-  <div class="task_projects">
-    <a href>今日のタスク</a>
-  </div>
-</div>
+<div class="wrapper">
 
-<div class="task_main">
-  <%= @tasks.each do |task| %>
-    <%= task.task_name %>
-    <%= task.deadline %>
-    <%= task.priority.name %>
-    <%= task.status.name %>
-    <%= task.content %>
-  <% end %>
+  <%# タスク表示部分 %>
+  <div class="tasks">
 
-  <div class="task">
-    <div class="task_name">業者者への回答</div>
-    <div class="deadline">令和7年6月30日</div>
-    <div class="priority">高</div>
-    <div class="status">未</div>
-    <div class="content">避難器具に関する問い合わせへの回答</div>
-  </div>
+    <%# task_header上部 %>
+    <div class="task_header">
+      <div class="task_projects">
+        <a href="#">今日のタスク</a> 
+      </div>
+    </div>
 
-  <div class="task">
-    <div class="task_name">児童手当申請</div>
-    <div class="deadline">令和7年7月30日</div>
-    <div class="priority">高</div>
-    <div class="status">進行中</div>
-    <div class="content">令和7年度の児童手当をシステムにより申請する</div>
-  </div>
-  
-</div>
+    <%# task_main部分 %>
+    <div class="task_main">
+      <% @tasks.each do |task| %>
+        <div class="task">
+          <div class="task-name">
+            タスク名：<%= task.task_name %>
+          </div>
+          <div class="deadline">
+            期限：<%= task.deadline %>
+          </div>
+          <div class="priority">
+            優先度：<%= task.priority.name %>
+          </div>
+          <div class="status">
+            状態：<%= task.status.name %>
+          </div>
+          <div class="content">
+            内容：<%= task.content %>
+          </div>
+        </div> 
+      <% end %> 
+    </div> 
 
-<div class="task_footer">
-
-</div>
+    <%# task_footer部分 %>
+    <div class="task_footer">
+      
+    </div>
+  </div> <%# .tasks %>
+</div> <%# .wrapper %>
