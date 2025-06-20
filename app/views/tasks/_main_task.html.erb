@@ -30,6 +30,9 @@
             内容：<%= task.content %>
           </div>
         </div> 
+        <div class="action_btn">
+          <%= link_to "編集", edit_task_path(task.id) %>
+        </div>
       <% end %> 
     </div> 
 
