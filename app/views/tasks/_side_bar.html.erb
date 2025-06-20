@@ -10,9 +10,9 @@
 <div class="side_footer">
   <div class="task_select">
     <ul>
-      <li class="task_bar"><a href>今日のタスク</a></li>
-      <li class="task_bar"><a href>今週のタスク</a></li>
-      <li class="task_bar"><a href>すべてのタスク</a></li>
+      <li class="task_bar"><%= link_to "今日のタスク", today_tasks_path %></li>
+      <li class="task_bar"><%= link_to "今週のタスク", week_tasks_path %></li>
+      <li class="task_bar"><%= link_to "すべてのタスク", tasks_path %></li>
       <li class="task_bar"><a href>プロジェクト</a></li>
     </ul>
   </div>
