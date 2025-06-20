@@ -212,5 +212,32 @@
   padding: 0 20px;
 }
 
+/* フラッシュメッセージ用のコンテナ */
+.flash-container{
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 80%;
+  max-width: 500px;
+}
 
+/* フラッシュメッセージのスタイル */
+.flash-message{
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+  text-align: center;
+  font-weight: 500;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+/* notice: 成功メッセージ（緑色） */
+.flash-message.notice{
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
 

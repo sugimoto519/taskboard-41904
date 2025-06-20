@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_week, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks.order("created_at ASC")
+    @tasks = current_user.tasks.order(deadline: :asc)
+    @title = "すべてのタスク"
   end
 
   def today 
@@ -24,7 +25,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to root_path
+      redirect_to root_path, notice: 'タスクを作成しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,13 +35,16 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task.update(task_params)
-    redirect_to root_path
+    if @task.update(task_params)
+      redirect_to root_path, notice: 'タスクを更新しました'
+    else 
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
     @task.destroy 
-    redirect_to root_path
+    redirect_to root_path, notice: 'タスクを削除しました'
   end
 
   private
