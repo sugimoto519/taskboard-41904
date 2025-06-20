@@ -30,9 +30,16 @@
             内容：<%= task.content %>
           </div>
         </div> 
+
+        <%# editｱｸｼｮﾝ %>
         <div class="action_btn">
           <%= link_to "編集", edit_task_path(task.id) %>
         </div>
+        <%# deleteｱｸｼｮﾝ %>
+        <div class="action_btn">
+          <%= link_to "削除", task_path(task.id), data: { turbo_method: :delete } %>
+        </div>
+
       <% end %> 
     </div> 
 
