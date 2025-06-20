@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def week
-    @tasks = current_user.tasks.where(deadline: Time.zone.now.beginning_of_week..Time.zone.now.end_of_week).order(deadline: :asc)
+    @tasks = current_user.tasks.where(deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week).order(deadline: :asc)
     @title = "今週のタスク"
     render :index
   end
