@@ -11,39 +11,45 @@
     </div>
 
     <%# task_main部分 %>
-    <div class="task_main">
-      <% @tasks.each do |task| %>
-        <div class="task">
-          <div class="task-name">
-            タスク名：<%= task.task_name %>
-          </div>
-          <div class="deadline">
-            期限：<%= task.deadline %>
-          </div>
-          <div class="priority">
-            優先度：<%= task.priority.name %>
-          </div>
-          <div class="status">
-            状態：<%= task.status.name %>
-          </div>
-          <div class="content">
-            内容：<%= task.content %>
-          </div>
-        </div> 
+  <div class="task_main">
+  <% @tasks.each do |task| %>
+    <%# 優先度に応じてCSSクラスを動的に追加します (例: class="... priority-高") %>
+    <div class="task-card priority-<%= task.priority.name %>">
 
-        <% if user_signed_in? && current_user.id == task.user_id %>
-          <%# editｱｸｼｮﾝ %>
-          <div class="action_btn">
-            <%= link_to "編集", edit_task_path(task.id) %>
-          </div>
-          <%# deleteｱｸｼｮﾝ %>
-          <div class="action_btn">
-            <%= link_to "削除", task_path(task.id), data: { turbo_method: :delete } %>
-          </div>
-        <% end %>
+      <div class="task-card-header">
+        <h3 class="task-title"><%= task.task_name %></h3>
+        <div class="task-card-actions">
+          <% if user_signed_in? && current_user.id == task.user_id %>
+            <%= link_to "編集", edit_task_path(task.id), class: 'action-link edit-link' %>
+            <%= link_to "削除", task_path(task.id), data: { turbo_method: :delete }, class: 'action-link delete-link' %>
+          <% end %>
+        </div>
+      </div>
 
-      <% end %> 
-    </div> 
+      <%# タスク内容が空でなければ表示します %>
+      <% if task.content.present? %>
+        <div class="task-card-body">
+          <p class="task-content-text"><%= task.content %></p>
+        </div>
+      <% end %>
+
+      <div class="task-card-footer">
+        <%# 状態に応じてCSSクラスを動的に追加します (例: class="... status-完了") %>
+        <span class="task-detail-badge status-<%= task.status.name %>">
+          <%= task.status.name %>
+        </span>
+        <span class="task-detail-item">
+          <strong>優先度:</strong> <%= task.priority.name %>
+        </span>
+        <span class="task-detail-item">
+          <strong>期限:</strong> <%= task.deadline.strftime("%Y/%m/%d %H:%M") %>
+        </span>
+      </div>
+
+    </div>
+  <% end %>
+  </div>
+
 
     <%# task_footer部分 %>
     <div class="task_footer">
