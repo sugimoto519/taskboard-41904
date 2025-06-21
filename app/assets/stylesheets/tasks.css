@@ -58,28 +58,35 @@
   color: #ffffff;
 }
 
+/* アクティブなサイドバーリンクのスタイル */
+.task_bar.active {
+  background-color: #3e4f66; /* 少し明るい背景色でハイライト */
+  border-radius: 5px;
+}
+
 /* task部分 */
 
 /* task_header上部 */
 .task_header{
-  height: 100px;
+  height: 70px;
   background-color: #ffffff;
-  padding: 0 20px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
 }
 
-.task_projects{
-  font-size: 20px;
-  padding: 5px;
-}
-
-.task_projects a{
-  text-decoration: none;
-  color: black;
+/* task_header内のh1タグに直接スタイルを適用 */
+.task_header h1 {
+  font-size: 1.5rem; /* 24px相当 */
+  font-weight: 600;
+  color: #333;
+  margin: 0; /* h1が持つデフォルトのマージンをリセット */
 }
 
 /* task_main部分 */
 .task_main{
-  height: calc(100vh - 190px);
+  height: calc(100vh - 160px);
   background-color: #fafafa;
   padding: 0 20px;
   overflow-y: auto;
@@ -114,7 +121,7 @@
 .task-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* タイトルが長い場合も考慮 */
+  align-items: center; 
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 15px;
   margin-bottom: 15px;
@@ -126,6 +133,24 @@
   font-weight: 600;
   color: #333;
   word-break: break-all; /* 長いタスク名がはみ出ないように */
+}
+
+.task-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* チェックボックスとタイトルの間のスペース */
+  flex-grow: 1; /* 左側の要素が可能な限り幅を取るように */
+  min-width: 0; /* flexアイテムが縮小できるように */
+}
+
+.completion-form {
+  margin: 0; /* formが持つデフォルトのマージンをリセット */
+}
+
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .task-card-actions {
@@ -241,3 +266,16 @@
   border-color: #badbcc;
 }
 
+/* 期限切れタスクのスタイル */
+.task-card.overdue {
+  background-color: #fff5f5; /* 薄い赤色の背景 */
+  border-left-color: #e74c3c; /* 優先度「高」と同じ赤色で統一 */
+}
+
+.task-card.overdue .task-title {
+  color: #c0392b; /* 少し暗めの赤 */
+}
+
+.task-card.overdue .task-card-footer {
+  color: #c0392b; /* フッターの文字も赤系に */
+}

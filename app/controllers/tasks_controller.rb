@@ -1,19 +1,19 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy, :toggle_completion]
 
   def index
-    @tasks = current_user.tasks.order(deadline: :asc)
+    @tasks = current_user.tasks.where(completed: false).order(deadline: :asc)
     @title = "すべてのタスク"
   end
 
   def today 
-    @tasks = current_user.tasks.where(deadline: Time.zone.now.all_day).order(deadline: :asc)
+    @tasks = current_user.tasks.where(completed: false, deadline: Time.zone.now.all_day).order(deadline: :asc)
     @title = "今日のタスク"
     render :index
   end
 
   def week
-    @tasks = current_user.tasks.where(deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week).order(deadline: :asc)
+    @tasks = current_user.tasks.where(completed: false, deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week).order(deadline: :asc)
     @title = "今週のタスク"
     render :index
   end
@@ -46,6 +46,22 @@ class TasksController < ApplicationController
     @task.destroy 
     redirect_to root_path, notice: 'タスクを削除しました'
   end
+
+  def toggle_completion 
+    @task.update(completed: !@task.completed)
+    if @task.completed?
+      flash[:notice] = "タスク「#{@task.task_name}」を完了しました！"
+    else 
+      flash[:notice] = "タスク「#{@task.task_name}」を未完了に戻しました！"
+    end 
+    redirect_back(fallback_location: root_path)
+  end
+
+  def completed
+    @tasks = current_user.tasks.where(completed: true).order(updated_at: :desc)
+    @title = "完了したタスク"
+    render :index
+  end 
 
   private
 

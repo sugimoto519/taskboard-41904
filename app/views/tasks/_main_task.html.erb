@@ -5,19 +5,29 @@
 
     <%# task_header上部 %>
     <div class="task_header">
-      <div class="task_projects">
-        <h1><%= @title || "タスク一覧" %></h1>
-      </div>
+      <h1><%= @title || "タスク一覧" %></h1>
     </div>
 
     <%# task_main部分 %>
   <div class="task_main">
   <% @tasks.each do |task| %>
-    <%# 優先度に応じてCSSクラスを動的に追加します (例: class="... priority-高") %>
-    <div class="task-card priority-<%= task.priority.name %>">
+    <%
+      # CSSクラスを動的に設定
+      card_classes = ["task-card", "priority-#{task.priority.name}"]
+      # 期限切れで、かつステータスが「完了」でない場合に 'overdue' クラスを追加
+      card_classes << "overdue" if task.deadline < Time.zone.now && task.status.name != '完了'
+    %>
+    <div class="<%= card_classes.join(' ') %>">
 
       <div class="task-card-header">
-        <h3 class="task-title"><%= task.task_name %></h3>
+         <div class="task-header-left">
+          <%= form_with(model: task, url: toggle_completion_task_path(task), method: :patch, class: 'completion-form') do |f| %>
+            <%# onchangeでチェックボックスが変更されたら即座にフォームを送信する %>
+            <%= f.check_box :completed, { onchange: 'this.form.requestSubmit()', class: 'task-checkbox' }, 'true', 'false' %>
+          <% end %>
+          <h3 class="task-title"><%= task.task_name %></h3>
+        </div>
+        
         <div class="task-card-actions">
           <% if user_signed_in? && current_user.id == task.user_id %>
             <%= link_to "編集", edit_task_path(task.id), class: 'action-link edit-link' %>
