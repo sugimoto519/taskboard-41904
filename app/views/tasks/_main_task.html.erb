@@ -25,7 +25,7 @@
             <%# onchangeでチェックボックスが変更されたら即座にフォームを送信する %>
             <%= f.check_box :completed, { onchange: 'this.form.requestSubmit()', class: 'task-checkbox' }, 'true', 'false' %>
           <% end %>
-          <h3 class="task-title"><%= task.task_name %></h3>
+          <h3 class="task-title"><%= link_to task.task_name, task_path(task), class: "task-show-link" %></h3>
         </div>
         
         <div class="task-card-actions">
