@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_14_134236) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_21_214935) do
   create_table "installs", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -21,6 +21,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_14_134236) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_installs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_installs_on_reset_password_token", unique: true
+  end
+
+  create_table "tasks", charset: "utf8mb3", force: :cascade do |t|
+    t.string "task_name", null: false
+    t.datetime "deadline", null: false
+    t.integer "priority_id", null: false
+    t.integer "status_id", null: false
+    t.text "content", null: false
+    t.integer "position"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "completed", default: false, null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -36,4 +50,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_14_134236) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tasks", "users"
 end

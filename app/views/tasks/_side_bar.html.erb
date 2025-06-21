@@ -3,17 +3,17 @@
     <%= link_to current_user.name, edit_user_registration_path(current_user) %>
   </div>
   <div class="task_create_btn">
-    <a href="#">タスクを作成</a>
+    <%= link_to "タスクを作成", new_task_path %>
   </div>
 </div>
 
 <div class="side_footer">
   <div class="task_select">
     <ul>
-      <li class="task_bar"><a href>今日のタスク</a></li>
-      <li class="task_bar"><a href>今週のタスク</a></li>
-      <li class="task_bar"><a href>すべてのタスク</a></li>
-      <li class="task_bar"><a href>プロジェクト</a></li>
+      <li class="task_bar <%= active_class_by_title('今日のタスク') %>"><%= link_to "今日のタスク", today_tasks_path %></li>
+      <li class="task_bar <%= active_class_by_title('今週のタスク') %>"><%= link_to "今週のタスク", week_tasks_path %></li>
+      <li class="task_bar <%= active_class_by_title('すべてのタスク') %>"><%= link_to "すべてのタスク", root_path %></li>
+      <li class="task_bar <%= active_class_by_title('完了したタスク') %>"><%= link_to "完了したタスク", completed_tasks_path %></li>
     </ul>
   </div>
 </div>
