@@ -135,6 +135,14 @@
   word-break: break-all; /* 長いタスク名がはみ出ないように */
 }
 
+.task-show-link {
+  color: inherit;
+  text-decoration: none;
+}
+.task-show-link:hover {
+  color: #007bff;
+}
+
 .task-header-left {
   display: flex;
   align-items: center;
@@ -278,4 +286,110 @@
 
 .task-card.overdue .task-card-footer {
   color: #c0392b; /* フッターの文字も赤系に */
+}
+
+/* --- Task Show Page Styles --- */
+.task-show-container {
+  padding: 20px 40px !important;
+}
+
+.task-detail-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.task-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.task-detail-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.task-meta .priority-高 { background-color: #e74c3c; }
+.task-meta .priority-中 { background-color: #f39c12; }
+.task-meta .priority-低 { background-color: #3498db; }
+
+.task-content-full p {
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* --- Comments Section Styles --- */
+.comments-section {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.comments-section h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.comment-form-group textarea {
+  min-height: 100px;
+}
+
+.comments-list {
+  margin-top: 2rem;
+}
+
+.comment-card {
+  border: 1px solid #e9ecef;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-author {
+  font-weight: 600;
+}
+
+.comment-timestamp {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.comment-body p {
+  margin: 0;
+  color: #343a40;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.delete-comment-link {
+  font-size: 0.8rem;
+  color: #dc3545;
+  text-decoration: none;
+}
+.delete-comment-link:hover {
+  text-decoration: underline;
 }

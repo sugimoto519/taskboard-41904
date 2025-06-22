@@ -1,0 +1,10 @@
+<%= form_with(model: [task, comment], local: true) do |f| %>
+  <%= render "devise/shared/error_messages", resource: f.object %>
+
+  <div class="comment-form-group">
+    <%= f.text_area :content, row: 4, class: "form-control", placeholder: "コメントを入力してください" %>
+  </div>
+  <div class="actions mt-4">
+    <%= f.submit "投稿する", class: "btn btn-primary" %>
+  </div>
+<% end %>

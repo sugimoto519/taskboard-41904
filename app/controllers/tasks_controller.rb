@@ -33,7 +33,7 @@ class TasksController < ApplicationController
 
   def show
     @comment = Comment.new 
-    @commens = @task.comments.includes(:user).order(created_at: :desc)
+    @comments = @task.comments.includes(:user).order(created_at: :desc)
   end 
 
   def edit
