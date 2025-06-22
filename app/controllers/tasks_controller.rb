@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy, :toggle_completion]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_completion]
 
   def index
     @tasks = current_user.tasks.where(completed: false).order(deadline: :asc)
@@ -30,6 +30,11 @@ class TasksController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def show
+    @comment = Comment.new 
+    @comments = @task.comments.includes(:user).order(created_at: :desc)
+  end 
 
   def edit
   end

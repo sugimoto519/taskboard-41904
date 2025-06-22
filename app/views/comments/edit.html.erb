@@ -1,0 +1,12 @@
+<div class="task_header task-header-centered">
+  <h1>コメントの編集</h1>
+</div>
+
+<div class="task_main task-show-container">
+  <div class="comments-section">
+    <%= render 'form', { task: @task, comment: @comment } %>
+    <div class="actions mt-4 text-center">
+      <%=link_to 'キャンセル', task_path(@task), class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>

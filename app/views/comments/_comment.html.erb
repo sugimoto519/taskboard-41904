@@ -1,0 +1,15 @@
+<div class="comment-card" id="comment-<%= comment.id %>">
+  <div class="comment-header">
+    <strong class="comment-author"><%= comment.user.name %></strong>
+    <span class=comment-timestamp><%= time_ago_in_words(comment.created_at) %>前</span>
+  </div>
+  <div class="comment-body">
+    <p><%= simple_format(comment.content) %></p>
+  </div>
+  <div class="comment-actions">
+    <% if comment.user == current_user %>
+      <%= link_to "編集", edit_task_comment_path(comment.task, comment), class: 'action-link-sm edit-comment-link' %>
+      <%= link_to "削除", [comment.task, comment], data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'action-link-sm delete-comment-link' %>
+    <% end %>
+  </div>
+</div>
