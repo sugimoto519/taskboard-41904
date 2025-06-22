@@ -27,7 +27,7 @@
 
 .task_create_btn a{
   color: deepskyblue;
-  font-size: 10px;
+  font-size: 16px;
   border: 1px solid lightskyblue;
   padding: 14px;
   text-decoration: none;
@@ -90,7 +90,7 @@
 
 /* task_main部分 */
 .task_main{
-  height: calc(100vh - 160px);
+  height: calc(100vh - 70px);
   background-color: #fafafa;
   padding: 0 20px;
   overflow-y: auto;
@@ -242,13 +242,6 @@
   background-color: #28a745; /* 緑 */
 }
 
-/* task_footer部分 */
-.task_footer{
-  height: 90px;
-  background-color: #dddddd;
-  padding: 0 20px;
-}
-
 /* フラッシュメッセージ用のコンテナ */
 .flash-container{
   position: absolute;
@@ -390,7 +383,7 @@
 }
 
 .comment-body p {
-  margin: 0;
+  margin-top: 1rem;
   color: #343a40;
   white-space: pre-wrap;
   word-break: break-all;
