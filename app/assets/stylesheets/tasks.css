@@ -1,5 +1,7 @@
 .wrapper{
   display: flex;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* サイドバー部分 */
@@ -42,8 +44,7 @@
 
 /* task部分 */
 .tasks{
-  width: calc(100vw - 300px);
-  height: 100vh;
+  flex-grow: 1; /* .wrapper (display: flex) 内で残りのスペースを埋める */
 }
 
 .task_select{
@@ -66,13 +67,16 @@
 }
 
 /* task_header上部 */
-.task_header{
+.task_header {
   height: 70px;
   background-color: #ffffff;
-  padding: 0 40px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eeeeee;
+  /* サイドバーがないページで全幅を占めるように */
+  width: 100%;
+  box-sizing: border-box; /* パディングを幅に含める */
 }
 
 /* task_header内のh1タグに直接スタイルを適用 */
@@ -92,8 +96,11 @@
 .task_main{
   height: calc(100vh - 70px);
   background-color: #fafafa;
-  padding: 0 20px;
+  padding: 20px;
   overflow-y: auto;
+  /* サイドバーがないページで全幅を占めるように */
+  width: 100%;
+  box-sizing: border-box; /* パディングを幅に含める */
 }
 
 .task-card {
@@ -471,4 +478,80 @@
   padding-top: 1rem;
   display: flex;
   justify-content: space-between;
+}
+
+/* --- Team Show Page Specific Styles --- */
+.team-show-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 20px;
+}
+
+.team-details-section,
+.team-members-section {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.team-details-section h2,
+.team-members-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.team-details-section p {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.add-member-form {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.add-member-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.member-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.member-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.member-list li:last-child {
+  border-bottom: none;
+}
+
+.team-tasks-section {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.team-tasks-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+/* チーム詳細ページのコンテナのパディングを調整 */
+.team-show-container {
+  padding: 0; /* task_mainがすでにパディングを持つため、ここでは0に */
 }

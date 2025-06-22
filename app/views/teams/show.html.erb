@@ -12,8 +12,48 @@
 </div>
 
 <div class="task_main">
-  <%# チームに属するタスクの一覧を表示 %>
-  <% @tasks.each do |task| %>
-    <%= render 'tasks/task_card', task: task %>
-  <% end %>
+  <div class="team-show-container">
+    <div class="team-details-section">
+      <h2>チーム情報</h2>
+      <p><strong>説明:</strong> <%= @team.description.presence || "説明なし" %></p>
+      <p><strong>オーナー:</strong> <%= @team.user.name %></p>
+    </div>
+
+    <div class="team-members-section">
+      <h2>メンバー (<%= @team.members.count %>人)</h2>
+      <% if @team.user == current_user %>
+        <div class="add-member-form">
+          <%= form_with url: team_team_users_path(@team), method: :post, local: true do %>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">メンバーを追加 (メールアドレス)</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="追加するユーザーのメールアドレス">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">追加</button>
+          <% end %>
+        </div>
+      <% end %>
+
+      <ul class="member-list">
+        <% @team.team_users.includes(:user).each do |team_user| %>
+          <li>
+            <%= team_user.user.name %> (<%= team_user.role.humanize %>)
+            <% if @team.user == current_user && team_user.user != current_user %>
+              <%= link_to "削除", team_team_user_path(@team, team_user), data: { turbo_method: :delete, turbo_confirm: "#{team_user.user.name} をチームから削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="team-tasks-section">
+      <h2>チームのタスク</h2>
+      <% if @tasks.any? %>
+        <% @tasks.each do |task| %>
+          <%= render 'tasks/task_card', task: task %>
+        <% end %>
+      <% else %>
+        <p>このチームにはまだタスクがありません。</p>
+      <% end %>
+    </div>
+  </div>
 </div>

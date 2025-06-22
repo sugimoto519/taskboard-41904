@@ -43,7 +43,7 @@ class TeamsController < ApplicationController
 
   def destroy 
     @team.destroy
-    redirect_to team_path, notice: 'チームを削除しました！', status: :see_other
+    redirect_to teams_path, notice: 'チームを削除しました！', status: :see_other
   end
 
   private
