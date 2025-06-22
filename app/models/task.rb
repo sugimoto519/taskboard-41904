@@ -3,6 +3,7 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :priority
   belongs_to :status
+  belongs_to :team
   has_many :comments, dependent: :destroy
 
   validates :task_name, :deadline, :content, presence: true
