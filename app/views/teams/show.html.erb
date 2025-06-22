@@ -1,0 +1,19 @@
+<div class="task_header">
+  <div class="team-header-content">
+    <h1><%= @team.name %></h1>
+    <div class="team-actions">
+      <%= link_to "新しいタスクを作成", new_task_path(team_id: @team.id), class: "btn btn-primary" %>
+      <% if @team.user == current_user %>
+        <%= link_to "チーム設定", edit_team_path(@team), class: "btn btn-secondary" %>
+        <%= link_to "チームを削除", @team, data: { turbo_method: :delete, turbo_confirm: "本当にこのチームを削除しますか？" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="task_main">
+  <%# チームに属するタスクの一覧を表示 %>
+  <% @tasks.each do |task| %>
+    <%= render 'tasks/task_card', task: task %>
+  <% end %>
+</div>

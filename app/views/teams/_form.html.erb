@@ -1,0 +1,19 @@
+<div class="auth-form-container">
+  <%= form_with model: team, local: true do |f| %>
+    <%= render "devise/shared/error_messages", resource: f.object %>
+
+    <div class="form-group mb-3">
+      <%= f.label :name, "チーム名", class: "form-label" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "チーム名を入力" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :description, "説明", class: "form-label" %>
+      <%= f.text_area :description, rows: 5, class: "form-control", placeholder: "チームの目的や概要など" %>
+    </div>
+
+    <div class="actions mt-4">
+      <%= f.submit class: "btn btn-primary w-100" %>
+    </div>
+  <% end %>
+</div>

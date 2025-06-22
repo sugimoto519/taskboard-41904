@@ -419,3 +419,56 @@
 .text-center {
   text-align: center;
 }
+
+/* --- Teams Page Styles --- */
+.team-header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.team-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.team-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  height: 100%;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.team-name {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.team-description {
+  color: #6c757d;
+  margin-bottom: 1rem;
+  min-height: 40px; /* 説明文の高さがバラバラでもカードの高さが揃うように */
+}
+
+.team-meta {
+  font-size: 0.85rem;
+  color: #6c757d;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}

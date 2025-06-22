@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root to: "tasks#index"
   devise_for :users
-  resources :teams
   resources :tasks do 
     resources :comments, only: [:create, :edit, :update, :destroy]
     member do 
@@ -13,4 +12,5 @@ Rails.application.routes.draw do
       get 'completed'
     end
   end
-end
+  resources :teams
+  end

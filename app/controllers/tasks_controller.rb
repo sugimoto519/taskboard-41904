@@ -2,24 +2,37 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_completion]
 
   def index
-    @tasks = current_user.tasks.where(completed: false).order(deadline: :asc)
+    # ユーザーが作成したタスク、またはユーザーが参加しているチームに属するタスクを表示
+    @tasks = Task.where(user: current_user)
+                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+                 .includes(:user)
+                 .order(deadline: :asc)
     @title = "すべてのタスク"
   end
 
-  def today 
-    @tasks = current_user.tasks.where(completed: false, deadline: Time.zone.now.all_day).order(deadline: :asc)
+  def today
+    @tasks = Task.where(deadline: Time.zone.now.all_day)
+                 .where(user: current_user)
+                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+                 .includes(:user)
+                 .order(deadline: :asc)
     @title = "今日のタスク"
     render :index
   end
 
   def week
-    @tasks = current_user.tasks.where(completed: false, deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week).order(deadline: :asc)
+    @tasks = Task.where(deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week)
+                 .where(user: current_user)
+                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+                 .includes(:user)
+                 .order(deadline: :asc)
     @title = "今週のタスク"
     render :index
   end
 
   def new
-    @task = Task.new 
+    @task = Task.new(team_id: params[:team_id])
+    @teams = current_user.participating_teams 
   end
 
   def create
@@ -27,6 +40,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to root_path, notice: 'タスクを作成しました'
     else
+      @teams = current_user.participating_teams
       render :new, status: :unprocessable_entity
     end
   end
@@ -63,10 +77,14 @@ class TasksController < ApplicationController
   end
 
   def completed
-    @tasks = current_user.tasks.where(completed: true).order(updated_at: :desc)
+    @tasks = Task.where(completed: true)
+               .where(user: current_user)
+               .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+               .includes(:user)
+               .order(updated_at: :desc)
     @title = "完了したタスク"
     render :index
-  end 
+  end
 
   private
 
@@ -75,7 +93,7 @@ class TasksController < ApplicationController
   end 
 
   def task_params
-    params.require(:task).permit(:task_name, :deadline, :priority_id, :status_id, :content).merge(user_id: current_user.id)
+    params.require(:task).permit(:task_name, :deadline, :priority_id, :status_id, :content, :team_id).merge(user_id: current_user.id)
   end
 
 end

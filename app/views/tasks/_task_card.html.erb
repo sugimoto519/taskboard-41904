@@ -1,0 +1,43 @@
+<%
+  # CSSクラスを動的に設定
+  card_classes = ["task-card", "priority-#{task.priority.name}"]
+  # 期限切れで、かつステータスが「完了」でない場合に 'overdue' クラスを追加
+  card_classes << "overdue" if task.deadline < Time.zone.now && task.status.name != '完了'
+%>
+<div class="<%= card_classes.join(' ') %>">
+
+  <div class="task-card-header">
+      <div class="task-header-left">
+      <%= form_with(model: task, url: toggle_completion_task_path(task), method: :patch, class: 'completion-form') do |f| %>
+        <%= f.check_box :completed, { onchange: 'this.form.requestSubmit()', class: 'task-checkbox' }, 'true', 'false' %>
+      <% end %>
+      <h3 class="task-title"><%= link_to task.task_name, task_path(task), class: "task-show-link" %></h3>
+    </div>
+    
+    <div class="task-card-actions">
+      <% if user_signed_in? && current_user.id == task.user_id %>
+        <%= link_to "編集", edit_task_path(task.id), class: 'action-link edit-link' %>
+        <%= link_to "削除", task_path(task.id), data: { turbo_method: :delete }, class: 'action-link delete-link' %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if task.content.present? %>
+    <div class="task-card-body">
+      <p class="task-content-text"><%= task.content %></p>
+    </div>
+  <% end %>
+
+  <div class="task-card-footer">
+    <span class="task-detail-badge status-<%= task.status.name %>">
+      <%= task.status.name %>
+    </span>
+    <span class="task-detail-item">
+      <strong>担当:</strong> <%= task.user.name %>
+    </span>
+    <span class="task-detail-item">
+      <strong>期限:</strong> <%= task.deadline.strftime("%Y/%m/%d %H:%M") %>
+    </span>
+  </div>
+
+</div>

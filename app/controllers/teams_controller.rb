@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
       redirect_to teams_path, alert: 'このチームにアクセスする権限がありません'
       return
     end
-    @tasks = @team.tasks.includes(:user, :priority, :status).order(deadline: :asc)
+    @tasks = @team.tasks.includes(:user).order(deadline: :asc)
   end
 
   def new
@@ -43,7 +43,7 @@ class TeamsController < ApplicationController
 
   def destroy 
     @team.destroy
-    redirect_to team_path, notice* 'チームを削除しました！', status: :see_other
+    redirect_to team_path, notice: 'チームを削除しました！', status: :see_other
   end
 
   private
