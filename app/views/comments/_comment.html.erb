@@ -6,7 +6,10 @@
   <div class="comment-body">
     <p><%= simple_format(comment.content) %></p>
   </div>
-  <% if comment.user == current_user %>
-    <%= link_to "削除", [comment.task, comment], data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'delete-comment-link' %>
-  <% end %>
+  <div class="comment-actions">
+    <% if comment.user == current_user %>
+      <%= link_to "編集", edit_task_comment_path(comment.task, comment), class: 'action-link-sm edit-comment-link' %>
+      <%= link_to "削除", [comment.task, comment], data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'action-link-sm delete-comment-link' %>
+    <% end %>
+  </div>
 </div>
