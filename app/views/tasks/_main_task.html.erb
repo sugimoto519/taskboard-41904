@@ -1,18 +1,9 @@
-<div class="wrapper">
+<%# task_header上部 %>
+<div class="task_header">
+  <h1><%= @title || "タスク一覧" %></h1>
+</div>
 
-  <%# タスク表示部分 %>
-  <div class="tasks">
-
-    <%# task_header上部 %>
-    <div class="task_header">
-      <h1><%= @title || "タスク一覧" %></h1>
-    </div>
-
-    <%# task_main部分 %>
-    <div class="task_main">
-      <% @tasks.each do |task| %>
-        <%= render 'tasks/task_card', task: task %>
-      <% end %>
-    </div>
-  </div> 
-</div> 
+<%# task_main部分 %>
+<div class="task_main">
+  <%= render partial: 'tasks/task_card', collection: @tasks, as: :task %>
+</div>

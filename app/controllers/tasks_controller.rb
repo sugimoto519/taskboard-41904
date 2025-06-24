@@ -4,8 +4,7 @@ class TasksController < ApplicationController
   def index
     # ユーザーが作成したタスク、またはユーザーが参加しているチームに属するタスクを表示
     @tasks = Task.where(user: current_user)
-                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
-                 .incomplete
+                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id))).incomplete
                  .includes(:user)
                  .order(deadline: :asc)
     @title = "すべてのタスク"
@@ -76,7 +75,7 @@ class TasksController < ApplicationController
     else 
       flash[:notice] = "タスク「#{@task.task_name}」を未完了に戻しました！"
     end 
-    redirect_back(fallback_location: root_path)
+    redirect_to root_path
   end
 
   def completed

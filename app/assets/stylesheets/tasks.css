@@ -1,14 +1,29 @@
+/* layout-fixedクラスを持つbodyにのみ、スクロールを無効にするスタイルを適用 */
+body.layout-fixed {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .wrapper{
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  flex-grow: 1;
+  min-height: 0;
 }
 
 /* サイドバー部分 */
 .side_bar{
   width: 300px;
-  height: 100vh;
+  flex-shrink: 0;
   background-color: #253141;
+  display: flex;
+  flex-direction: column;
 }
 
 /* サイドバー上部*/
@@ -38,13 +53,17 @@
 /* サイドバー下部*/
 .side_footer{
   background-color: #2F3E51;
-  height: calc(100vh - 100px);
+  flex-grow: 1;
   padding: 0 20px;
+  overflow-y: auto;
 }
 
 /* task部分 */
 .tasks{
   flex-grow: 1; /* .wrapper (display: flex) 内で残りのスペースを埋める */
+  /* メインコンテンツエリアをFlexコンテナ(縦方向)にする */
+  display: flex;
+  flex-direction: column;
 }
 
 .task_select{
@@ -94,12 +113,11 @@
 
 /* task_main部分 */
 .task_main{
-  height: calc(100vh - 70px);
+  flex-grow: 1;
   background-color: #fafafa;
   padding: 20px;
   overflow-y: auto;
   /* サイドバーがないページで全幅を占めるように */
-  width: 100%;
   box-sizing: border-box; /* パディングを幅に含める */
 }
 
@@ -192,6 +210,7 @@
   color: #007bff;
   background-color: rgba(0, 123, 255, 0.1);
 }
+
 .edit-link:hover {
   background-color: rgba(0, 123, 255, 0.2);
 }
@@ -218,7 +237,7 @@
 
 .task-card-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap; /* 画面が狭い場合に折り返す */
   gap: 15px;
@@ -236,6 +255,10 @@
   font-weight: 600;
   color: #fff;
 }
+
+.task-detail-badge.priority-高 { background-color: #e74c3c; }
+.task-detail-badge.priority-中 { background-color: #f39c12; }
+.task-detail-badge.priority-低 { background-color: #3498db; }
 
 /* 状態に応じたバッジの色分け */
 /* Statusモデルのnameが「未着手」「進行中」「完了」であることを想定 */
@@ -322,13 +345,21 @@
   font-size: 2rem;
 }
 
-.task-meta {
+.task-index-edit-actions {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.task-meta {
   gap: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #f0f0f0;
+}
+
+.task-detail-badge {
+  margin-right: 20px;
 }
 
 .task-meta .priority-高 { background-color: #e74c3c; }

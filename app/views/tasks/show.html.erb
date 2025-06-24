@@ -9,10 +9,18 @@
       <h2><%= @task.task_name %></h2>
       <%= link_to "一覧に戻る", root_path, class: 'action-link' %>
     </div>
-    <div class="task-meta">
-      <span class="task-detail-badge status-<%= @task.status.name %>"><%= @task.status.name %></span>
-      <span class="task-detail-badge priority-<%= @task.priority.name %>"><%= @task.priority.name %></span>
-      <span class="task-detail-item"><strong>期限:</strong><%= @task.deadline.strftime("%Y/%m/%d %H:%M") %></span>
+    <div class="task-index-edit-actions">
+      <div class="task-meta">
+        <span class="task-detail-badge status-<%= @task.status.name %>"><%= @task.status.name %></span>
+        <span class="task-detail-badge priority-<%= @task.priority.name %>"><%= @task.priority.name %></span>
+        <span class="task-detail-item"><strong>期限:</strong><%= @task.deadline.strftime("%Y/%m/%d") %></span>
+      </div>
+      <div class="task-card-actions">
+        <% if user_signed_in? && current_user.id == @task.user_id %>
+          <%= link_to "編集", edit_task_path(@task.id), class: 'action-link edit-link' %>
+          <%= link_to "削除", task_path(@task.id), data: { turbo_method: :delete }, class: 'action-link delete-link' %>
+        <% end %>
+      </div>
     </div>
     <%if @task.content.present? %>
       <div class="task-content-full">
