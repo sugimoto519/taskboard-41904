@@ -7,7 +7,7 @@
 <div class="<%= card_classes.join(' ') %>">
 
   <div class="task-card-header">
-      <div class="task-header-left">
+    <div class="task-header-left">
       <%= form_with(model: task, url: toggle_completion_task_path(task), method: :patch, class: 'completion-form') do |f| %>
         <%= f.check_box :completed, { onchange: 'this.form.requestSubmit()', class: 'task-checkbox' }, 'true', 'false' %>
       <% end %>
@@ -32,11 +32,14 @@
     <span class="task-detail-badge status-<%= task.status.name %>">
       <%= task.status.name %>
     </span>
+    <span class="task-detail-badge priority-<%= task.priority.name %>">
+      <strong>優先度:</strong> <%= task.priority.name %>
+    </span>
     <span class="task-detail-item">
       <strong>担当:</strong> <%= task.user.name %>
     </span>
     <span class="task-detail-item">
-      <strong>期限:</strong> <%= task.deadline.strftime("%Y/%m/%d %H:%M") %>
+      <strong>期限:</strong> <%= task.deadline.strftime("%Y/%m/%d") %>
     </span>
   </div>
 

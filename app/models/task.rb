@@ -6,6 +6,9 @@ class Task < ApplicationRecord
   belongs_to :team
   has_many :comments, dependent: :destroy
 
+  scope :completed, -> { where(completed: true) }
+  scope :incomplete, -> { where(completed: false) }
+
   validates :task_name, :deadline, :content, presence: true
 
   validates :priority_id, numericality: { other_than: 1, message: "can't be blank"}

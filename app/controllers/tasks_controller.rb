@@ -5,6 +5,7 @@ class TasksController < ApplicationController
     # ユーザーが作成したタスク、またはユーザーが参加しているチームに属するタスクを表示
     @tasks = Task.where(user: current_user)
                  .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+                 .incomplete
                  .includes(:user)
                  .order(deadline: :asc)
     @title = "すべてのタスク"
@@ -14,6 +15,7 @@ class TasksController < ApplicationController
     @tasks = Task.where(deadline: Time.zone.now.all_day)
                  .where(user: current_user)
                  .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+                 .incomplete
                  .includes(:user)
                  .order(deadline: :asc)
     @title = "今日のタスク"
@@ -24,6 +26,7 @@ class TasksController < ApplicationController
     @tasks = Task.where(deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week)
                  .where(user: current_user)
                  .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+                 .incomplete
                  .includes(:user)
                  .order(deadline: :asc)
     @title = "今週のタスク"
@@ -77,19 +80,26 @@ class TasksController < ApplicationController
   end
 
   def completed
-    @tasks = Task.where(completed: true)
-               .where(user: current_user)
-               .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
-               .includes(:user)
-               .order(updated_at: :desc)
+    @tasks = visible_tasks.completed # 共通のスコープとcompletedスコープを組み合わせる
+             .includes(:user)
+             .order(updated_at: :desc)
     @title = "完了したタスク"
     render :index
   end
 
   private
 
+    # ユーザーが閲覧可能なタスクの共通スコープを定義
+  def visible_tasks
+    Task.where(user: current_user)
+        .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+  end
+
   def set_task
-    @task = current_user.tasks.find(params[:id])
+    @task =  visible_tasks.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    # タスクが見つからない、またはアクセス権がない場合の処理
+    redirect_to root_path, alert: "指定されたタスクは見つかりませんでした。"
   end 
 
   def task_params
