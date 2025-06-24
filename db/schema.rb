@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_224552) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_22_040452) do
   create_table "comments", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -44,7 +44,30 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_224552) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "completed", default: false, null: false
+    t.bigint "team_id", null: false
+    t.index ["team_id"], name: "index_tasks_on_team_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
+  create_table "team_users", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_users_on_team_id"
+    t.index ["user_id", "team_id"], name: "index_team_users_on_user_id_and_team_id", unique: true
+    t.index ["user_id"], name: "index_team_users_on_user_id"
+  end
+
+  create_table "teams", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_teams_on_name", unique: true
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -63,4 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_224552) do
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "tasks", "users"
+  add_foreign_key "team_users", "teams"
+  add_foreign_key "team_users", "users"
+  add_foreign_key "teams", "users"
 end

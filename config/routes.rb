@@ -12,4 +12,7 @@ Rails.application.routes.draw do
       get 'completed'
     end
   end
+  resources :teams do 
+    resources :team_users, only: [:create, :destroy]
+  end
 end
