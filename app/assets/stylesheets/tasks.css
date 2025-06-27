@@ -303,12 +303,16 @@ html, body {
 
 /* 期限切れタスクのスタイル */
 .task-card.overdue {
-  background-color: #fff5f5; /* 薄い赤色の背景 */
+  background-color: #e8c9d5; /* 薄い赤色の背景 */
   border-left-color: #e74c3c; /* 優先度「高」と同じ赤色で統一 */
 }
 
 .task-card.overdue .task-title {
   color: #c0392b; /* 少し暗めの赤 */
+}
+
+.task-card.overdue .task-content-text{
+  color: #c0392b;
 }
 
 .task-card.overdue .task-card-footer {
