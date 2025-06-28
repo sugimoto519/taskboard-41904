@@ -3,17 +3,14 @@ class TasksController < ApplicationController
 
   def index
     # ユーザーが作成したタスク、またはユーザーが参加しているチームに属するタスクを表示
-    @tasks = Task.where(user: current_user)
-                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id))).incomplete
+    @tasks = visible_tasks.incomplete
                  .includes(:user)
                  .order(deadline: :asc)
     @title = "すべてのタスク"
   end
 
   def today
-    @tasks = Task.where(deadline: Time.zone.now.all_day)
-                 .where(user: current_user)
-                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+    @tasks = visible_tasks.where(deadline: Time.zone.now.all_day)
                  .incomplete
                  .includes(:user)
                  .order(deadline: :asc)
@@ -22,9 +19,7 @@ class TasksController < ApplicationController
   end
 
   def week
-    @tasks = Task.where(deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week)
-                 .where(user: current_user)
-                 .or(Task.where(team_id: current_user.participating_teams.pluck(:id)))
+    @tasks = visible_tasks.where(deadline: Time.zone.now.beginning_of_day..Time.zone.now.end_of_week)
                  .incomplete
                  .includes(:user)
                  .order(deadline: :asc)
