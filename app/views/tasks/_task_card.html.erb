@@ -2,7 +2,7 @@
   # CSSクラスを動的に設定
   card_classes = ["task-card", "priority-#{task.priority.name}"]
   # 期限切れで、かつステータスが「完了」でない場合に 'overdue' クラスを追加
-  card_classes << "overdue" if task.deadline < Time.zone.now && task.status.name != '完了'
+  card_classes << "overdue" if task.deadline.present? && task.deadline < Time.zone.now && !task.completed
 %>
 <div class="<%= card_classes.join(' ') %>">
 
