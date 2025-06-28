@@ -33,5 +33,8 @@
     <div class="actions mt-4">
       <%= f.submit "変更する", class: "btn btn-primary w-100" %>
     </div>
+    <div class="actions mt-4 text-center">
+      <%=link_to '戻る', task_path(@task), class: 'btn btn-secondary' %>
+    </div>
   <% end %>
 </div>

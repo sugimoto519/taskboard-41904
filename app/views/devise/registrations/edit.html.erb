@@ -22,7 +22,6 @@
 
   <div class="form-group mb-3">
     <%= f.label :password, "新しいパスワード", class: "form-label" %>
-    <small class="form-text text-muted">(変更しない場合は空欄のままにしてください)</small>
     <% if @minimum_password_length %>
       <small class="form-text text-muted">(<%= @minimum_password_length %> 文字以上)</small>
     <% end %>
