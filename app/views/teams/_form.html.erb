@@ -16,7 +16,11 @@
       <%= f.submit class: "btn btn-primary w-100" %>
     </div>
     <div class="actions mt-4 text-center">
-      <%=link_to '戻る', team_path(@team), class: 'btn btn-secondary' %>
+      <% if team.persisted? %>
+        <%= link_to '戻る', team_path(team), class: 'btn btn-secondary' %>
+      <% else %>
+        <%= link_to '戻る', teams_path, class: 'btn btn-secondary' %>
+      <% end %>
     </div>
   <% end %>
 </div>
